@@ -1,15 +1,23 @@
 package com.example.storage_sp.controller;
 
-import java.util.ArrayList;
+import com.example.storage_sp.domain.Item;
+import com.example.storage_sp.domain.Storage;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
+import java.util.Scanner;
 
+@RestController
 public class MainController {
-    public Shelfs[] shelf = new Shelfs[100];
-    public List<Shelfs> shelfsList = new ArrayList<Shelfs>();
+    private Storage storage;
 
-    private class Shelfs {
-        private int shelfNumber;
-        private int rowNum;
-        private int colNum;
+    @GetMapping("/items")
+    public List<Item> getAll(){
+
+
+        return null;
     }
+
+
 }
