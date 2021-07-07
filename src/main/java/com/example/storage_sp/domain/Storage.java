@@ -3,31 +3,37 @@ package com.example.storage_sp.domain;
 
 public class Storage {
 
-    private Shelf[] shelf;
+    private Box box;
 
     {
-        shelf = new Shelf[4];
-        for(int i = 0; i < 4; i++)
+        box = new Box(5);
+        /*
+        for(int i = 0; i < 1; i++)
         {
-            shelf[i] = new Shelf(10,10);
+            box[i] = new Box(5);
         }
+         */
     }
 
-    public void addItem(String type, String brandN, String description){
-        for(int i = 0; i < 4; i++){
-            if(shelf[i].hasSpace()){
-                shelf[i].addItem(new Item(type, brandN, description));
+    public void addItem(String brandN, String description){
+        for(int i = 0; i < 1; i++){
+            if(box.hasSpace()){
+                box.addItem(new Item(brandN, description));
                 break;
             }
         }
     }
-    public void takeItem(int ID){
-        for(int i = 0; i < 4; i++){
-            if(shelf[i].contains(ID)){
-                shelf[i].deleteItem(ID);
-                break;
+    public Item takeItem(int ID){
+        for(int i = 0; i < 1; i++){
+            if(box.contains(ID)){
+                Item retItem = box.deleteItem(ID);
+                return retItem;
             }
         }
         throw new IllegalArgumentException("There is no such Item");
+    }
+
+    public Item getItemFS(int ID) {
+        return box.getItem(ID);
     }
 }
