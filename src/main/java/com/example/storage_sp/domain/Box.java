@@ -50,11 +50,9 @@ public class Box {
         throw new IllegalArgumentException("Item with this ID does not exist.");
     }
     public Item getItem(int ID){
-        Item retItem;
         for (int i = 0; i < shelfs; i++) {
             if (items[i] != null && items[i].getID() == ID) {
-                retItem = items[i];
-                return retItem;
+                return items[i];
             }
         }
         throw new IllegalArgumentException("No such element");
