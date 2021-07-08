@@ -1,42 +1,45 @@
 package com.example.storage_sp.domain;
 
 
+import java.util.ArrayList;
+
 public class Storage {
     private int storageSize = 2;
-    private Box[] box = new Box[storageSize];
+    private ArrayList<Box> box = new ArrayList<Box>(storageSize);
 
-    {
-
+    public Storage(){
+        for (int i = 0; i < storageSize; i++)
+            box.add(null);
         for(int i = 0; i < storageSize; i++)
         {
-            box[i] = new Box(5);
+            box.set(i, new Box(5));
         }
 
     }
 
-    public boolean addItem(String brandN, String description){
+    public boolean addItem(int place, String brandN, String description){
         for(int i = 0; i < storageSize; i++){
-            if(box[i].hasSpace()){
-                box[i].addItem(new Item(brandN, description));
+            if(box.get(i).hasSpace()){
+                box.get(i).addItem(new Item(place, brandN, description));
                 return true;
             }
         }
         throw new IllegalArgumentException("No space, new item does not added");
     }
-    public Item takeItem(int ID){
+    public Item takeItem(int place){
         for(int i = 0; i < storageSize; i++){
-            if(box[i].contains(ID)){
-                Item retItem = box[i].deleteItem(ID);
+            if(box.get(i).contains(place)){
+                Item retItem = box.get(i).deleteItem(place);
                 return retItem;
             }
         }
         throw new IllegalArgumentException("No such item");
     }
 
-    public Item getItemFS(int ID) {
+    public Item getItemFS(int place) {
         Item retItem;
         for (int i = 0; i < storageSize; i++) {
-            retItem = box[i].getItem(ID);
+            retItem = box.get(i).getItem(place);
             if (retItem != null)
                 return retItem;
         }
