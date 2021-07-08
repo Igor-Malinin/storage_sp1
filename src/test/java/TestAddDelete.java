@@ -7,12 +7,13 @@ public class TestAddDelete {
     @Test
     public void testAdd() {
         Storage storage = new Storage();
-        int place = 3;
-        storage.addItem(place,"newMonitor", "newDescription");
-        Assert.assertEquals("newMonitor", storage.getItemFS(place).getBrandN());
-        Assert.assertEquals("newDescription", storage.getItemFS(place).getDescription());
-
-        Assert.assertEquals("newMonitor", storage.takeItem(place).getBrandN());
-        //Assert.assertEquals("newDescription", storage.takeItem(0).getDescription());
+        for (int i = 0; i < 10; i++) {
+            storage.addItem("newMonitor № " + i, "newDescription № " + i);
+            Assert.assertEquals("newMonitor № " + i, storage.getItemFS(i).getBrandN());
+            Assert.assertEquals("newDescription № " + i, storage.getItemFS(i).getDescription());
+        }
+        for (int i = 0; i < 10; i++)
+            //Assert.assertEquals("newMonitor № " + i, storage.takeItem(i).getBrandN());
+            Assert.assertEquals("newDescription № " + i, storage.takeItem(i).getDescription());
     }
 }

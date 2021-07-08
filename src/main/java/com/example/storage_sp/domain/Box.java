@@ -5,11 +5,8 @@ import java.util.List;
 public class Box {
     private int capacity = 0;
     private int shelfs;
-    private int places;
-    private int place;
     private int size;
     private Item[] items;
-    private Item singleItem;
 
 
     public Box(int shelfs) {
@@ -21,9 +18,9 @@ public class Box {
     public boolean hasSpace(){
         return capacity != size;
     }
-    public boolean contains(int place){
+    public boolean contains(int ID){
         for (int i = 0; i < shelfs; i++) {
-            if (items[i] != null && items[i].getPlace() == place) {
+            if (items[i] != null && items[i].getID() == ID) {
                 return true;
             }
 
@@ -32,35 +29,35 @@ public class Box {
     }
     public void addItem(Item item){
         if (capacity == size)
-            throw new IllegalArgumentException("New Item does not added");
+            throw new IllegalArgumentException("No space, new Item does not added");
         //mainLoop:
         for (int i = 0; i < shelfs; i++) {
-            if (items[i] == null && i == item.getPlace()) {
+            if (items[i] == null) {
                 items[i] = item;
                 capacity++;
                 break;
             }
         }
     }
-    public Item deleteItem(int place){
+    public Item deleteItem(int ID){
         for (int i = 0; i < shelfs; i++) {
-            if (items[i] != null && items[i].getPlace() == place) {
+            if (items[i] != null && items[i].getID() == ID) {
                 Item retItem = items[i];
                 items[i] = null;
                 capacity--;
-                System.out.println(retItem.getBrandN() + " " + retItem.getDescription());
+                //System.out.println(retItem.getBrandN() + " " + retItem.getDescription());
                 return retItem;
             }
 
         }
         throw new IllegalArgumentException("Item with this ID does not exist.");
     }
-    public Item getItem(int place){
+    public Item getItem(int ID){
         for (int i = 0; i < shelfs; i++) {
-            if (items[i] != null && items[i].getPlace() == place) {
+            if (items[i] != null && items[i].getID() == ID) {
                 return items[i];
             }
         }
-        throw new IllegalArgumentException("No such element");
+        return null;
     }
 }
