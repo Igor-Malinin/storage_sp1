@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Storage {
     private int storageSize = 2;
+    private int shelfs = 5;
     private ArrayList<Box> box = new ArrayList<Box>(storageSize);
 
     public Storage(){
@@ -12,19 +13,36 @@ public class Storage {
             box.add(null);
         for(int i = 0; i < storageSize; i++)
         {
-            box.set(i, new Box(5));
+            box.set(i, new Box(shelfs));
         }
 
     }
 
-    public boolean addItem(int place, String brandN, String description){
-        for(int i = 0; i < storageSize; i++){
-            if(box.get(i).hasSpace()){
-                box.get(i).addItem(new Item(place, brandN, description));
+    public boolean addItem(int place, String type, String brandN, String description){
+        for(int i = 0; i < storageSize; i++)
+            if(box.get(i).hasSpace(place) >= 0){
+                box.get(i).addItem(new Item(place, type, brandN, description));
+                return true;
+            }
+        throw new IllegalArgumentException("No space or place is not empty, new item does not added");
+    }
+    public boolean addItem(String type, String brandN, String description) {
+        int place[] = new int[storageSize];
+        for (int i = 0; i < storageSize; i++) {
+            place[i] = box.get(i).hasSpace();
+            if (place[i] >= 0) {
+                box.get(i).addItem(new Item(i == 0 ? place[i]: place[i] + shelfs * i,
+                        type, brandN, description));
                 return true;
             }
         }
         throw new IllegalArgumentException("No space, new item does not added");
+    }
+    public boolean itemIsAdded(int place){
+        for(int i = 0; i < storageSize; i++)
+            if(box.get(i).itemIsAdded(i))
+                return true;
+        return false;
     }
     public Item takeItem(int place){
         for(int i = 0; i < storageSize; i++){
@@ -33,7 +51,16 @@ public class Storage {
                 return retItem;
             }
         }
-        throw new IllegalArgumentException("No such item");
+        throw new IllegalArgumentException("This place is empty");
+    }
+    public Item takeItem(String type){
+        for(int i = 0; i < storageSize; i++){
+            if(box.get(i).contains(type)){
+                Item retItem = box.get(i).deleteItem(type);
+                return retItem;
+            }
+        }
+        throw new IllegalArgumentException("No item with such type");
     }
 
     public Item getItemFS(int place) {
@@ -45,5 +72,6 @@ public class Storage {
         }
         throw new IllegalArgumentException("No such item");
     }
+
 
 }

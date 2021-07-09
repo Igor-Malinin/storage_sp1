@@ -18,13 +18,32 @@ public class Box {
             items.add(null);
     }
 
-    public boolean hasSpace(){
-        return capacity != size;
+    public int hasSpace(){
+        if (capacity != size)
+            for(int i = 0; i < shelfs; i++)
+                if(items.get(i) == null)
+                    return i;
+        return -1;
+    }
+    public int hasSpace(int place){
+        if (capacity != size)
+            for(int i = 0; i < shelfs; i++)
+                if(items.get(i) == null && items.get(i).getPlace() == place)
+                    return i;
+        return -1;
     }
     public boolean contains(int place){
         for (int i = 0; i < shelfs; i++) {
             if (items.size() > 0)
                 if (items.get(i) != null && items.get(i).getPlace() == place)
+                    return true;
+        }
+        return false;
+    }
+    public boolean contains(String type){
+        for (int i = 0; i < shelfs; i++) {
+            if (items.size() > 0)
+                if (items.get(i) != null && items.get(i).getType() == type)
                     return true;
         }
         return false;
@@ -41,6 +60,13 @@ public class Box {
             }
         }
     }
+    public boolean itemIsAdded(int place){
+        for (int i = 0; i < shelfs; i++) {
+            if (items.get(i) != null && items.get(i).getPlace() == place)
+                return true;
+        }
+        return false;
+    }
     public Item deleteItem(int place){
         for (int i = 0; i < shelfs; i++) {
             if (items.get(i) != null && items.get(i).getPlace() == place) {
@@ -52,7 +78,20 @@ public class Box {
             }
 
         }
-        throw new IllegalArgumentException("Item with this ID does not exist.");
+        throw new IllegalArgumentException("This place is empty.");
+    }
+    public Item deleteItem(String type){
+        for (int i = 0; i < shelfs; i++) {
+            if (items.get(i) != null && items.get(i).getType() == type) {
+                Item retItem = items.get(i);
+                items.set(i, null);
+                capacity--;
+                //System.out.println(retItem.getBrandN() + " " + retItem.getDescription());
+                return retItem;
+            }
+
+        }
+        throw new IllegalArgumentException("We do not have items with this type in the storage.");
     }
     public Item getItem(int place){
         for (int i = 0; i < shelfs; i++) {
