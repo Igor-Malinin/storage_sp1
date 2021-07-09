@@ -25,13 +25,6 @@ public class Box {
                     return i;
         return -1;
     }
-    public int hasSpace(int place){
-        if (capacity != size)
-            for(int i = 0; i < shelfs; i++)
-                if(items.get(i) == null && items.get(i).getPlace() == place)
-                    return i;
-        return -1;
-    }
     public boolean contains(int place){
         for (int i = 0; i < shelfs; i++) {
             if (items.size() > 0)
@@ -101,4 +94,6 @@ public class Box {
         }
         return null;
     }
+
+    //public Item searchForItem()
 }

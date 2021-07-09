@@ -14,30 +14,36 @@ public class TestAddDelete {
         Storage storage = new Storage();
         // добавляем несколько предметов по типу.
         // место, на которое кладется предмет устанавливается автоматически (ближайшее свободное)
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 20; i++) {
             storage.addItem("monitor", "newMonitor", "newDescription");
             Assert.assertEquals("newMonitor", storage.getItemFS(i).getBrandN());
             Assert.assertEquals("newDescription", storage.getItemFS(i).getDescription());
         }
         // забираем несколько предметов по типу (самые ближние)
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 8; i++) {
             Assert.assertEquals("monitor", storage.takeItem("monitor").getType());
             //Assert.assertEquals("newDescription", storage.takeItem(i).getDescription());
         }
-        //expectedException.expect(IllegalArgumentException.class);
-        //expectedException.expectMessage("No item with such type");
+            System.out.println(storage.getKPI());
 
-        // Негативный тест
+    }
+    // Негативный тест
+    @Test
+    public void expectedExceptions() {
+        Storage storage = new Storage();
         Exception exception = Assert.assertThrows(IllegalArgumentException.class, () -> {
             storage.takeItem("mouse");
         });
         String expectedMessage = "No item with such type";
         String actualMessage = exception.getMessage();
         Assert.assertTrue(actualMessage.contains(expectedMessage));
-
-        // Позитивный тест (добавлен ли новый предмет)
+    }
+    // Позитивный тест (добавлен ли новый предмет)
+    @Test
+    public void isPositive() {
+        Storage storage = new Storage();
         storage.addItem("keyboard", "NewKeyboard", "NewKeyboardDescription");
         Assert.assertTrue(storage.itemIsAdded(0));
-    }
 
+    }
 }

@@ -4,8 +4,9 @@ package com.example.storage_sp.domain;
 import java.util.ArrayList;
 
 public class Storage {
-    private int storageSize = 2;
+    private int storageSize = 8;
     private int shelfs = 5;
+    private int KPI = 0;
     private ArrayList<Box> box = new ArrayList<Box>(storageSize);
 
     public Storage(){
@@ -15,16 +16,15 @@ public class Storage {
         {
             box.set(i, new Box(shelfs));
         }
-
     }
 
     public boolean addItem(int place, String type, String brandN, String description){
         for(int i = 0; i < storageSize; i++)
-            if(box.get(i).hasSpace(place) >= 0){
+            if(box.get(i).hasSpace() >= 0){
                 box.get(i).addItem(new Item(place, type, brandN, description));
                 return true;
             }
-        throw new IllegalArgumentException("No space or place is not empty, new item does not added");
+        throw new IllegalArgumentException("No space, new item does not added");
     }
     public boolean addItem(String type, String brandN, String description) {
         int place[] = new int[storageSize];
@@ -56,13 +56,13 @@ public class Storage {
     public Item takeItem(String type){
         for(int i = 0; i < storageSize; i++){
             if(box.get(i).contains(type)){
+                KPI+=i;
                 Item retItem = box.get(i).deleteItem(type);
                 return retItem;
             }
         }
         throw new IllegalArgumentException("No item with such type");
     }
-
     public Item getItemFS(int place) {
         Item retItem;
         for (int i = 0; i < storageSize; i++) {
@@ -73,5 +73,11 @@ public class Storage {
         throw new IllegalArgumentException("No such item");
     }
 
+    public int getKPI() {
+        return KPI;
+    }
 
+    public void setKPI(int KPI) {
+        this.KPI = KPI;
+    }
 }
