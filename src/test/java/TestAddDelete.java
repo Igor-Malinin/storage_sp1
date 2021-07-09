@@ -15,15 +15,21 @@ public class TestAddDelete {
         // добавляем несколько предметов по типу.
         // место, на которое кладется предмет устанавливается автоматически (ближайшее свободное)
         for (int i = 0; i < 20; i++) {
-            storage.addItem("monitor", "newMonitor", "newDescription");
-            Assert.assertEquals("newMonitor", storage.getItemFS(i).getBrandN());
+            storage.addItem("keyboard", "newKeyboard", "newDescription");
+            Assert.assertEquals("newKeyboard", storage.getItemFS(i).getBrandN());
             Assert.assertEquals("newDescription", storage.getItemFS(i).getDescription());
+        }
+        for (int i = 0; i < 20; i++) {
+            storage.addItem("monitor", "newMonitor", "newDescription");
+            Assert.assertEquals("newMonitor", storage.getItemFS(i+20).getBrandN());
+            Assert.assertEquals("newDescription", storage.getItemFS(i+20).getDescription());
         }
         // забираем несколько предметов по типу (самые ближние)
         for (int i = 0; i < 8; i++) {
             Assert.assertEquals("monitor", storage.takeItem("monitor").getType());
             //Assert.assertEquals("newDescription", storage.takeItem(i).getDescription());
         }
+        // подсчет KPI
             System.out.println(storage.getKPI());
 
     }
