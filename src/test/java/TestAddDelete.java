@@ -25,10 +25,10 @@ public class TestAddDelete {
             Assert.assertEquals("newDescription", storage.getItemFS(i+20).getDescription());
         }
         // забираем несколько предметов по типу (самые ближние)
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 7; i++)
             Assert.assertEquals("monitor", storage.takeItem("monitor").getType());
             //Assert.assertEquals("newDescription", storage.takeItem(i).getDescription());
-        }
+
         // подсчет KPI
             System.out.println(storage.getKPI());
 

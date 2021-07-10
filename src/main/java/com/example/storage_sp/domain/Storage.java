@@ -56,8 +56,8 @@ public class Storage {
     public Item takeItem(String type){
         for(int i = 0; i < storageSize; i++){
             if(box.get(i).contains(type)){
-                KPI = i;
                 Item retItem = box.get(i).deleteItem(type);
+                KPI += i+1;
                 return retItem;
             }
         }
