@@ -1,7 +1,7 @@
 package com.example.storage_sp.domain;
 
 public class KPI {
-    private int boxes = 8;
+    /*private int boxes = 8;
     private double KPI = 0;
     private double currentCase = 0;
     private double idealCase = 1;
@@ -14,5 +14,5 @@ public class KPI {
         }
         KPI = idealCase/currentCase;
         return KPI;
-    }
+    }*/
 }
