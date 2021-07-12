@@ -4,15 +4,16 @@ package com.example.storage_sp.domain;
 import java.util.ArrayList;
 
 public class Storage {
-    private int storageSize = 8;
+    private int storageSize;
     private int shelfs = 5;
-    private int KPI = 0;
+    private int iterations = 0;
     private ArrayList<Box> box = new ArrayList<Box>(storageSize);
 
-    public Storage(){
-        for (int i = 0; i < storageSize; i++)
+    public Storage(int boxes){
+        this.storageSize = boxes;
+        for (int i = 0; i < boxes; i++)
             box.add(null);
-        for(int i = 0; i < storageSize; i++)
+        for(int i = 0; i < boxes; i++)
         {
             box.set(i, new Box(shelfs));
         }
@@ -56,8 +57,8 @@ public class Storage {
     public Item takeItem(String type){
         for(int i = 0; i < storageSize; i++){
             if(box.get(i).contains(type)){
+                iterations += i + 1;
                 Item retItem = box.get(i).deleteItem(type);
-                KPI += i+1;
                 return retItem;
             }
         }
@@ -73,11 +74,8 @@ public class Storage {
         throw new IllegalArgumentException("No such item");
     }
 
-    public int getKPI() {
-        return KPI;
+    public int getIterations() {
+        return iterations;
     }
 
-    public void setKPI(int KPI) {
-        this.KPI = KPI;
-    }
 }
