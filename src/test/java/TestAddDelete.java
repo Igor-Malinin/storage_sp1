@@ -10,6 +10,7 @@ import java.io.IOException;
 
 public class TestAddDelete {
     private int boxes = 8;
+    // подсчет KPI
     @Test
     public void testCalcKPI() {
         Storage storage = new Storage(boxes);
@@ -23,35 +24,25 @@ public class TestAddDelete {
         for (int i = 0; i < 20; i++) {
             storage.addItem("monitor", "newMonitor", "newDescription");
         }
-        int amount = 17;
-        int temp = 0;
-        for (int i = 0; i < amount; i++) {
-            if (i <= boxes)
-                idealCase = amount;
-            else {
-                idealCase = boxes;
-                temp = amount % boxes;
-                if (temp == 0) {
-                for(int q = 1, k = 2; q < amount/boxes; q++,k++)
-                    for(int j = 0; j < (amount - boxes); j++)
-                            idealCase += k;
-                }
-                else {
-                    for(int q = 0, k = 2; q < amount/boxes; q++,k++)
-                        for(int j = 0; j < (amount - boxes); j++)
-                            idealCase += k;
-                }
-            }
 
+        int amount = 18;
+        int temp = storage.getShelfs();
+        for (int j = 0, k = 0; j < amount; j++) {
+            if (j % temp != 0)
+                idealCase += k;
+            else {
+                k++;
+                idealCase += k;
+            }
+        }
+        for (int i = 0; i < amount; i++) {
             storage.takeItem("monitor");
         }
         currentCase = storage.getIterations();
-        idealCase = 27;
         kpi = idealCase/currentCase;
         System.out.println("iC = " + idealCase + "; cC = " + currentCase + "; KPI = " + kpi);
-
     }
-    // подсчет KPI
+
     @Test
     public void testAddDel() {
         Storage storage = new Storage(boxes);

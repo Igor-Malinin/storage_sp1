@@ -77,5 +77,5 @@ public class Storage {
     public int getIterations() {
         return iterations;
     }
-
+    public int getShelfs() { return shelfs; }
 }
