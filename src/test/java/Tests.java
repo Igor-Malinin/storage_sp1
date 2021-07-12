@@ -1,5 +1,4 @@
 import com.example.storage_sp.domain.Item;
-import com.example.storage_sp.domain.KPI;
 import com.example.storage_sp.domain.Storage;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -8,7 +7,7 @@ import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
 
-public class TestAddDelete {
+public class Tests {
     private int boxes = 8;
     // подсчет KPI
     @Test
