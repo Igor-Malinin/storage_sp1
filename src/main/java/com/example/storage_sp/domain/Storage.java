@@ -1,81 +1,54 @@
 package com.example.storage_sp.domain;
 
 
+import com.example.storage_sp.applications.BoxLogic;
+
 import java.util.ArrayList;
 
 public class Storage {
-    private int storageSize;
+    private int boxes;
     private int shelfs = 5;
-    private int iterations = 0;
-    private ArrayList<Box> box = new ArrayList<Box>(storageSize);
+    private ArrayList<BoxLogic> boxLogic = new ArrayList<BoxLogic>(boxes);
 
     public Storage(int boxes){
-        this.storageSize = boxes;
+        this.boxes = boxes;
         for (int i = 0; i < boxes; i++)
-            box.add(null);
+            boxLogic.add(null);
         for(int i = 0; i < boxes; i++)
         {
-            box.set(i, new Box(shelfs));
+            boxLogic.set(i, new BoxLogic(shelfs));
         }
     }
 
-    public boolean addItem(int place, String type, String brandN, String description){
-        for(int i = 0; i < storageSize; i++)
-            if(box.get(i).hasSpace() >= 0){
-                box.get(i).addItem(new Item(place, type, brandN, description));
-                return true;
-            }
-        throw new IllegalArgumentException("No space, new item does not added");
-    }
-    public boolean addItem(String type, String brandN, String description) {
-        int place[] = new int[storageSize];
-        for (int i = 0; i < storageSize; i++) {
-            place[i] = box.get(i).hasSpace();
-            if (place[i] >= 0) {
-                box.get(i).addItem(new Item(i == 0 ? place[i]: place[i] + shelfs * i,
-                        type, brandN, description));
-                return true;
-            }
-        }
-        throw new IllegalArgumentException("No space, new item does not added");
-    }
-    public boolean itemIsAdded(int place){
-        for(int i = 0; i < storageSize; i++)
-            if(box.get(i).itemIsAdded(i))
+    /*public boolean itemIsAdded(int place){
+        for(int i = 0; i < boxes; i++)
+            if(boxLogic.get(i).itemIsAdded(i))
                 return true;
         return false;
-    }
-    public Item takeItem(int place){
-        for(int i = 0; i < storageSize; i++){
-            if(box.get(i).contains(place)){
-                Item retItem = box.get(i).deleteItem(place);
-                return retItem;
-            }
-        }
-        throw new IllegalArgumentException("This place is empty");
-    }
-    public Item takeItem(String type){
-        for(int i = 0; i < storageSize; i++){
-            if(box.get(i).contains(type)){
-                iterations += i + 1;
-                Item retItem = box.get(i).deleteItem(type);
-                return retItem;
-            }
-        }
-        throw new IllegalArgumentException("No item with such type");
-    }
-    public Item getItemFS(int place) {
-        Item retItem;
-        for (int i = 0; i < storageSize; i++) {
-            retItem = box.get(i).getItem(place);
-            if (retItem != null)
-                return retItem;
-        }
-        throw new IllegalArgumentException("No such item");
+    }*/
+
+
+    public int getBoxes() {
+        return boxes;
     }
 
-    public int getIterations() {
-        return iterations;
+    public void setBoxes(int boxes) {
+        this.boxes = boxes;
     }
-    public int getShelfs() { return shelfs; }
+
+    public int getShelfs() {
+        return shelfs;
+    }
+
+    public void setShelfs(int shelfs) {
+        this.shelfs = shelfs;
+    }
+
+    public ArrayList<BoxLogic> getBoxLogic() {
+        return boxLogic;
+    }
+
+    public void setBox(ArrayList<BoxLogic> boxLogic) {
+        this.boxLogic = boxLogic;
+    }
 }
