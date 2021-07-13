@@ -2,11 +2,9 @@ package com.example.storage_sp.applications;
 
 import com.example.storage_sp.domain.Item;
 import com.example.storage_sp.domain.Storage;
-import com.example.storage_sp.repository.StorageStatus;
+import com.example.storage_sp.repository.StorageInterface;
 
-import java.util.ArrayList;
-
-public class StorageLogic implements StorageStatus {
+public class StorageLogic implements StorageInterface {
     private int boxes;
     private int iterations = 0;
     private Storage storage;

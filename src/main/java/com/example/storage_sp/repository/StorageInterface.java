@@ -4,7 +4,7 @@ import com.example.storage_sp.domain.Item;
 
 import java.util.ArrayList;
 
-public interface StorageStatus {
+public interface StorageInterface {
 
     boolean addItem(int place, String type, String brandN, String description);
 
