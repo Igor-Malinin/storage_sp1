@@ -2,10 +2,11 @@ package com.example.storage_sp.applications;
 
 import com.example.storage_sp.domain.Item;
 import com.example.storage_sp.domain.Storage;
+import com.example.storage_sp.repository.StorageStatus;
 
 import java.util.ArrayList;
 
-public class StorageLogic {
+public class StorageLogic implements StorageStatus {
     private int boxes;
     private int iterations = 0;
     private Storage storage;
@@ -62,9 +63,11 @@ public class StorageLogic {
         }
         throw new IllegalArgumentException("No such item");
     }
+    
     public int getShelfs(){
         return storage.getShelfs();
     }
+
     public int getIterations(){
         return iterations;
     }

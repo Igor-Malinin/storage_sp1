@@ -25,7 +25,7 @@ public class Tests {
             storageLogic.addItem("monitor", "newMonitor", "newDescription");
         }
 
-        int amount = 1;
+        int amount = 8;
         int temp = storageLogic.getShelfs();
         for (int j = 0, k = 0; j < amount; j++) {
             if (j % temp != 0)
