@@ -20,14 +20,6 @@ public class Storage {
         }
     }
 
-    /*public boolean itemIsAdded(int place){
-        for(int i = 0; i < boxes; i++)
-            if(boxLogic.get(i).itemIsAdded(i))
-                return true;
-        return false;
-    }*/
-
-
     public int getBoxes() {
         return boxes;
     }

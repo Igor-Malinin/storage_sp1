@@ -17,14 +17,6 @@ public class Box {
             items.add(null);
     }
 
-    /*public boolean itemIsAdded(int place){
-        for (int i = 0; i < shelfs; i++) {
-            if (items.get(i) != null && items.get(i).getPlace() == place)
-                return true;
-        }
-        return false;
-    }*/
-
     public int getCapacity() {
         return capacity;
     }

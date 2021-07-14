@@ -4,10 +4,13 @@ import com.example.storage_sp.domain.Item;
 import com.example.storage_sp.domain.Storage;
 import com.example.storage_sp.repository.StorageInterface;
 
+import java.util.HashMap;
+
 public class StorageLogic implements StorageInterface {
     private int boxes;
     private int iterations = 0;
     private Storage storage;
+
 
     public StorageLogic(int boxes){
         this.boxes = boxes;
@@ -52,6 +55,13 @@ public class StorageLogic implements StorageInterface {
         }
         throw new IllegalArgumentException("No item with such type");
     }
+
+    public boolean itemIsAdded(int place) {
+        for (int i = 0; i < boxes; i++)
+            if (storage.getBoxLogic().get(i).itemIsAdded(i))
+                return true;
+        return false;
+    }
     public Item getItemFS(int place) {
         Item retItem;
         for (int i = 0; i < boxes; i++) {
@@ -61,7 +71,7 @@ public class StorageLogic implements StorageInterface {
         }
         throw new IllegalArgumentException("No such item");
     }
-    
+
     public int getShelfs(){
         return storage.getShelfs();
     }
@@ -69,4 +79,5 @@ public class StorageLogic implements StorageInterface {
     public int getIterations(){
         return iterations;
     }
+
 }

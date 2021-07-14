@@ -3,14 +3,19 @@ package com.example.storage_sp.applications;
 import com.example.storage_sp.domain.Box;
 import com.example.storage_sp.domain.Item;
 
+import java.util.HashMap;
+
 public class BoxLogic {
     private int shelfs;
     private int capacity = 0;
     private Box box;
+    private StorStatus storStatus;
+
 
     public BoxLogic(int shelfs){
         this.shelfs = shelfs;
         box = new Box(shelfs);
+        storStatus = new StorStatus();
     }
 
     public int hasSpace(){
@@ -44,6 +49,7 @@ public class BoxLogic {
             if (box.getItems().get(i) == null) {
                 box.getItems().set(i, item);
                 box.setCapacity(++capacity);
+                storStatus.updateStorageStatus(box.getItems().get(i).getPlace(), item);
                 break;
             }
         }
@@ -53,9 +59,9 @@ public class BoxLogic {
         for (int i = 0; i < shelfs; i++) {
             if (box.getItems().get(i) != null && box.getItems().get(i).getPlace() == place) {
                 Item retItem = box.getItems().get(i);
+                storStatus.updateStorageStatus(box.getItems().get(i).getPlace(), null);
                 box.getItems().set(i, null);
                 box.setCapacity(--capacity);
-                //System.out.println(retItem.getBrandN() + " " + retItem.getDescription());
                 return retItem;
             }
 
@@ -66,14 +72,21 @@ public class BoxLogic {
         for (int i = 0; i < shelfs; i++) {
             if (box.getItems().get(i) != null && box.getItems().get(i).getType() == type) {
                 Item retItem = box.getItems().get(i);
+                storStatus.updateStorageStatus(box.getItems().get(i).getPlace(), null);
                 box.getItems().set(i, null);
                 box.setCapacity(--capacity);
-                //System.out.println(retItem.getBrandN() + " " + retItem.getDescription());
                 return retItem;
             }
 
         }
         throw new IllegalArgumentException("We do not have items with this type in the storage.");
+    }
+    public boolean itemIsAdded(int place) {
+        for (int i = 0; i < shelfs; i++) {
+            if (box.getItems().get(i) != null && box.getItems().get(i).getPlace() == place)
+                return true;
+        }
+        return false;
     }
     public Item getItem(int place){
         for (int i = 0; i < shelfs; i++) {
@@ -83,4 +96,5 @@ public class BoxLogic {
         }
         return null;
     }
+
 }
