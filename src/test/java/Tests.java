@@ -17,8 +17,8 @@ public class Tests {
             storageLogic.addItem("monitor", "newMonitor", "newDescription");
         }
         storageLogic.takeItem(5);
-        System.out.println(storStatus.getStorageStatus());
-        storStatus.getOccupiedPlacesInfo();
+        storStatus.listOfOccupiedPlacesInfo();
+        Assert.assertTrue(storStatus.getEmptyPlace(34));
 
         //int j = 0;
         //for (int i = 0, k = storageLogic.getShelfs(); i < boxes; i++, k+=storageLogic.getShelfs())

@@ -16,7 +16,7 @@ public class StorStatus implements StorageStatus {
     public HashMap<Integer, Item> getStorageStatus(){
         return storageStatus;
     }
-    public void getOccupiedPlacesInfo() {
+    public void listOfOccupiedPlacesInfo() {
         System.out.println("Occupied places: ");
         for (int i = 0; i < storageStatus.size(); i++) {
             if (storageStatus.get(i) != null)
@@ -24,7 +24,11 @@ public class StorStatus implements StorageStatus {
         }
     }
 
-
+    public boolean getEmptyPlace(int i){
+        if(storageStatus.get(i) == null)
+            return true;
+        return false;
+    }
 
 
 }

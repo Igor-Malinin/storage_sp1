@@ -13,8 +13,9 @@ public class Box {
         this.shelfs = shelfs;
         this.size = shelfs;
         items = new ArrayList<Item>();
-        for (int i = 0; i < shelfs; i++)
+        for (int i = 0; i < shelfs; i++) {
             items.add(null);
+        }
     }
 
     public int getCapacity() {
